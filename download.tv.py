@@ -8,8 +8,11 @@ from urlparse import urlparse
 if len(sys.argv) != 2:
 	sys.exit(1)
 
-slug =  urlparse(sys.argv[1]).fragment.split('/')[2] # "slug" - z.B. 'vor-20-jahren-autounfall'
-
+parsed_url =  urlparse(sys.argv[1])
+if parsed_url.fragment == '':
+	slug =  parsed_url.path.split('/')[2] 
+else:
+	slug =  parsed_url.fragment.split('/')[2] 
 
 apihost = 'http://spiegeltv-ivms2-restapi.s3.amazonaws.com';
 
